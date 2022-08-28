@@ -27,7 +27,7 @@ jobs:
         run: echo '${{ toJSON(matrix) }}'
 
   php-cs-fixer:
-    if: contains(github.event.comment.html_url, '/pull/') && contains(github.event.comment.body, '/fixphp')
+    # if: contains(github.event.comment.html_url, '/pull/') && contains(github.event.comment.body, '/fixphp')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
