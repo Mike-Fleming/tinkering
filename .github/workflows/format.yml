@@ -3,8 +3,6 @@ on:
   workflow_dispatch:
   issue_comment:
     types: [created, edited]
-    paths:
-      - '**.php'
 
 permissions:
   contents: write
@@ -26,7 +24,9 @@ jobs:
           mv php-cs-fixer /usr/local/bin/php-cs-fixer
 
       - name: Run php-cs-fixer
-        run: php-cs-fixer fix . --config=.php-cs-fixer.dist.php
+        run: |
+          php-cs-fixer fix . --config=.php-cs-fixer.dist.php
+          git diff
 
       - name: Commit & push
         run: |
@@ -35,4 +35,3 @@ jobs:
           git commit -a -m "GH Actions PSR Formatting"
           git log
           git push
-
