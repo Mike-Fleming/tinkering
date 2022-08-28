@@ -1,0 +1,38 @@
+name: PHP Formatting Test
+on:
+  workflow_dispatch:
+  issue_comment:
+    types: [created, edited]
+    paths:
+      - '**.php'
+
+permissions:
+  contents: write
+  pull-requests: write
+  
+jobs:
+  php-cs-fixer:
+    if: contains(github.event.comment.html_url, '/pull/') && contains(github.event.comment.body, '/fixphp')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Install
+        run: |
+          curl -L https://cs.symfony.com/download/php-cs-fixer-v3.phar -o php-cs-fixer
+          chmod u+x php-cs-fixer
+          mv php-cs-fixer /usr/local/bin/php-cs-fixer
+
+      - name: Run php-cs-fixer
+        run: php-cs-fixer fix . --config=.php-cs-fixer.dist.php
+
+      - name: Commit & push
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -a -m "GH Actions PSR Formatting"
+          git log
+          git push
+
