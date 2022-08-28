@@ -14,7 +14,7 @@ $config = new PhpCsFixer\Config();
 $config
     ->setRiskyAllowed(true)
     ->setRules([
-        '@PSR1' => true,
+        '@PSR12' => true,
     ])
     ->setFinder($finder)
 ;
