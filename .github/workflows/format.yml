@@ -32,7 +32,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: ${{ github.event.issue.number }}
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Install
         run: |
