@@ -1,17 +1,16 @@
 <?php
-class CarInsurance {
+class CarInsurance
+{
     public $id;
-    public 
-    $name;
+    public $name;
 
     public function __construct($id, $name)
     {
         $this->id = $id;
-        $this->name = 
+        $this->name =
         $name;
     }
-    public function 
-    message()
+    public function message()
     {
         return "My Car Insurance's ID is " .
             $this->id .
@@ -21,10 +20,11 @@ class CarInsurance {
     }
 }
 
-$myCarInsurance = new           
+$myCarInsurance = new
 CarInsurance("1", "State Farm");
-echo 
-$myCarInsurance->message(); echo "<br>";
+echo
+$myCarInsurance->message();
+echo "<br>";
 
 $myCarInsurance = new CarInsurance("2", "Geico");
 echo $myCarInsurance->message();
